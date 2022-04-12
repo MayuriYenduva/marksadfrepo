@@ -26,6 +26,9 @@
 				},
 				{
 					"name": "TypeConversionTimestamp"
+				},
+				{
+					"name": "Typecpnversions"
 				}
 			],
 			"scriptLines": [
@@ -61,7 +64,8 @@
 				"     format: 'table') ~> DimEmp",
 				"EmployeeCSV filter(!isNull(EmpID)) ~> NonNullEmployeeIDRecords",
 				"NonNullEmployeeIDRecords derive(EmpID = toInteger(EmpID),",
-				"          processtime = currentTimestamp()) ~> TypeConversionTimestamp"
+				"          processtime = currentTimestamp()) ~> TypeConversionTimestamp",
+				"DimEmp derive(EMPID = toInteger(EMPID)) ~> Typecpnversions"
 			]
 		}
 	}
