@@ -15,7 +15,17 @@
 			"sinks": [],
 			"transformations": [],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          EmpID as string,",
+				"          Region as string,",
+				"          Status as string,",
+				"          Function as string,",
+				"          Level as string,",
+				"          Role as string,",
+				"          StartDate as string,",
+				"          EndDate as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> EmployeeCSV"
 			]
