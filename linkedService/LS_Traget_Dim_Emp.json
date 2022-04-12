@@ -5,8 +5,8 @@
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=myemp.database.windows.net;initial catalog=master;user id=adf",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDM3NTBDQ0RCLUQxMjctNDkwMS05NDcyLTBBMjYzMkJFOEU4MF80MGVjOTk1Zi1kNzVmLTQ3M2UtYmNmNS0wNzYwZDBkNmYwYjUiDQp9"
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=myemp.database.windows.net;initial catalog=myempsqldb;user id=adf",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDM3NTBDQ0RCLUQxMjctNDkwMS05NDcyLTBBMjYzMkJFOEU4MF8zM2NiZDYwOC01NThmLTRhOTQtYjdkNC0zNjBjNjE2MDM3MzciDQp9"
 		}
 	}
 }
