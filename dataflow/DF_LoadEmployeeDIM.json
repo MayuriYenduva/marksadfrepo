@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "EmployeeCSV"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable1",
+						"type": "DatasetReference"
+					},
+					"name": "DimEmp"
 				}
 			],
 			"sinks": [],
@@ -35,6 +42,23 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> EmployeeCSV",
+				"source(output(",
+				"          EMPID as integer,",
+				"          surrogatekey as string,",
+				"          Region as string,",
+				"          Status as string,",
+				"          EmpFunction as string,",
+				"          Level as string,",
+				"          Role as string,",
+				"          StartDate as date,",
+				"          EndDate as date,",
+				"          iscurrent as integer,",
+				"          processtime as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> DimEmp",
 				"EmployeeCSV filter(!isNull(EmpID)) ~> NonNullEmployeeIDRecords",
 				"NonNullEmployeeIDRecords derive(EmpID = toInteger(EmpID),",
 				"          processtime = currentTimestamp()) ~> TypeConversionTimestamp"
