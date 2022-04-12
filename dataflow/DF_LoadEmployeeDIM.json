@@ -1,5 +1,5 @@
 {
-	"name": "dataflow1",
+	"name": "DF_LoadEmployeeDIM",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -13,7 +13,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "NonNullEmployeeIDRecords"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          EmpID as string,",
@@ -27,7 +31,8 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> EmployeeCSV"
+				"     ignoreNoFilesFound: false) ~> EmployeeCSV",
+				"EmployeeCSV filter(!isNull(EmpID)) ~> NonNullEmployeeIDRecords"
 			]
 		}
 	}
