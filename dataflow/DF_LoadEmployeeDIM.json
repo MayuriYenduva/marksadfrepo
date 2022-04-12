@@ -16,6 +16,9 @@
 			"transformations": [
 				{
 					"name": "NonNullEmployeeIDRecords"
+				},
+				{
+					"name": "TypeConversionTimestamp"
 				}
 			],
 			"scriptLines": [
@@ -32,7 +35,9 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> EmployeeCSV",
-				"EmployeeCSV filter(!isNull(EmpID)) ~> NonNullEmployeeIDRecords"
+				"EmployeeCSV filter(!isNull(EmpID)) ~> NonNullEmployeeIDRecords",
+				"NonNullEmployeeIDRecords derive(EmpID = toInteger(EmpID),",
+				"          processtime = currentTimestamp()) ~> TypeConversionTimestamp"
 			]
 		}
 	}
