@@ -29,6 +29,12 @@
 				},
 				{
 					"name": "Typecpnversions"
+				},
+				{
+					"name": "LkpTarget"
+				},
+				{
+					"name": "selectnames"
 				}
 			],
 			"scriptLines": [
@@ -65,7 +71,28 @@
 				"EmployeeCSV filter(!isNull(EmpID)) ~> NonNullEmployeeIDRecords",
 				"NonNullEmployeeIDRecords derive(EmpID = toInteger(EmpID),",
 				"          processtime = currentTimestamp()) ~> TypeConversionTimestamp",
-				"DimEmp derive(EMPID = toInteger(EMPID)) ~> Typecpnversions"
+				"DimEmp derive(EMPID = toInteger(EMPID)) ~> Typecpnversions",
+				"TypeConversionTimestamp, Typecpnversions lookup(TypeConversionTimestamp@EmpID == Typecpnversions@EMPID,",
+				"     multiple: true,",
+				"     broadcast: 'auto')~> LkpTarget",
+				"LkpTarget select(mapColumn(",
+				"          EmpID = TypeConversionTimestamp@EmpID,",
+				"          Region = EmployeeCSV@Region,",
+				"          Status = EmployeeCSV@Status,",
+				"          Function,",
+				"          Level = EmployeeCSV@Level,",
+				"          Role = EmployeeCSV@Role,",
+				"          StartDate = EmployeeCSV@StartDate,",
+				"          EndDate = EmployeeCSV@EndDate,",
+				"          processtime = TypeConversionTimestamp@processtime,",
+				"          EMPID = Typecpnversions@EMPID,",
+				"          surrogatekey,",
+				"          EmpFunction,",
+				"          iscurrent,",
+				"          processtime = DimEmp@processtime",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> selectnames"
 			]
 		}
 	}
